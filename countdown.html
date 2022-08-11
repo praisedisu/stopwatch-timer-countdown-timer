@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <title>countdown timer</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h2 class="text-center pb-5"><span id="etr">0</span><span id="min">00</span>:<span id="etra">0</span><span id="sec">00</span></h2>
+                <div class="form-inline" onkeyup="check()">
+                    <input type="number" class="form-control col-6" onkeyup="check()" placeholder="minutes must be less than 59 and more than 0" id="mininput"/>
+                    <input type="number" class="form-control col-6" onkeyup="check()" placeholder="seconds must be less than 59 and more than 0" id="secinput"/>
+                </div>
+                <div class="text-center pt-3">
+                    <button class="btn btn-info" id="start" onclick="start()" >START</button>
+                    <button class="btn btn-info" id="stop" onclick="stop()">STOP</button>
+                    <button class="btn btn-info" id="reset" onclick="reset()">RESET</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            var my;
+            var secs;
+            var mins;
+            var ma;
+            var ty;
+            var secInterval;
+            
+            function stop(){
+                clearInterval(secInterval)
+                document.getElementById("start").disabled = false;
+            }
+
+            document.getElementById("etra").hidden = true
+            document.getElementById("etr").hidden = true
+            document.getElementById("start").disabled = true
+
+            function start() {
+                mins = document.getElementById("mininput").value
+                secs = document.getElementById("secinput").value;
+
+                document.getElementById("min").innerHTML = mins;
+                document.getElementById("sec").innerHTML = secs;
+
+                mins = Number(mins)
+                secs = Number(secs)
+
+                var totalSeconds = (mins * 60) + secs;
+                var text = Number(text)
+                var h = document.getElementById("secinput").value
+
+                function minutesInterval(){
+                    if (mins > 0){
+                        if (mins > 10) {
+                            document.getElementById("etr").hidden = true
+                        } else if (mins < 9) {
+                            document.getElementById("etr").hidden = false;
+                        }
+                        mins--;
+                        document.getElementById("min").innerHTML = mins;
+                    } else {
+                        document.getElementById("min").innerHTML = "";
+                    }
+                }
+
+                function secondsInterval(){
+                    secInterval = setInterval(function () {
+                        if(secs >= 1){
+                            if(secs > 10){
+                                document.getElementById("etra").hidden = true
+                            }
+                            else if(secs < 9){
+                                document.getElementById("etra").hidden = false;
+                            }
+                            secs--
+                            document.getElementById("sec").innerHTML = secs;
+                        }
+                        else{
+                            if(secs === 0){
+                                minutesInterval()
+                                if(totalSeconds <= 0){
+                                    clearInterval(secInterval)
+                                } else {
+                                    secs = 59
+                                    document.getElementById("etra").hidden = true
+                                }
+                                document.getElementById("sec").innerHTML = secs
+                            } else {
+                                document.getElementById("sec").innerHTML = ""
+                            }
+                        }
+                        totalSeconds--;
+                    },1000)
+            
+                }
+                secondsInterval()
+                document.getElementById("start").disabled = true;
+            }
+
+            function check(){
+                if (document.getElementById("secinput").value > 59 || document.getElementById("secinput").value === "") {
+                    document.getElementById("start").disabled = true
+                } else {
+                    if (document.getElementById("mininput").value > 59) {
+                        document.getElementById("start").disabled = true
+                    } else {
+                        document.getElementById("start").disabled = false
+                    }
+                }
+
+                if (document.getElementById("mininput").value === "") {
+                    mins = 0
+                }
+            }
+            function reset(){
+                document.location.reload();
+            }
+        </script>
+    </body>
+</html>

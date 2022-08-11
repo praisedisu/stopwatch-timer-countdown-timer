@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.css">
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="text-right">
+                    <a href="countdown.html" class="btn btn-secondary">COUNTDOWN TIMER</a>
+                </div>
+                <div class="text-center">
+                    <h2 id="timebox">
+                        <span id="tmin">0</span><span id="umin">0</span>:<span id="tsecs">0</span><span id="usecs">0</span>:<span id="tmil">0</span><span id="umil">0</span></h2>
+                </div>
+                <p id="p"></p>
+                <div class="text-center">
+                    <div class="btn btn-group pt-5">
+                        <button class="btn btn-info" onclick="start()" id="start">START</button>
+                        <button class="btn btn-info" onclick="stop()" id="stop">STOP</button>
+                        <button class="btn btn-info" onclick="reset()">RESET</button>
+                        
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script>
+            document.getElementById("start").disabled = false;
+            
+            var i = 1
+            var a = 1
+            var b = 1
+            var c = 1
+            var d = 1
+            var e = 1
+            function umil(){
+                my = setInterval (function() {
+                    document.getElementById("umil").innerHTML = ""
+                    document.getElementById("umil").innerHTML += i++;
+                    
+                    if(i > 9)
+                    {
+                        i = 0
+                    }
+                }, 10)
+            }
+
+            function tmil(){
+                
+                my1 = setInterval(function() {
+                    document.getElementById("tmil").innerHTML = ""
+                    document.getElementById("tmil").innerHTML += a++;
+                    if(a > 9) {
+                        a = 0
+                    }
+                },100)
+            }
+
+            function usecs(){
+                my2 =  setInterval(function() {
+                    document.getElementById("usecs").innerHTML = ""
+                    document.getElementById("usecs").innerHTML += c++;
+                    if(c > 9)
+                    {
+                        c = 0
+                    }
+                },1000)
+            }
+
+            function tsecs(){
+                my3 = setInterval(function() {
+                    document.getElementById("tsecs").innerHTML = ""
+                    document.getElementById("tsecs").innerHTML += d++;
+                    if(d > 5)
+                    {
+                        d = 0
+                    }
+                },10000)
+            }
+
+            function umin(){
+                my4 = setInterval(function() {
+                    document.getElementById("umin").innerHTML = ""
+                    document.getElementById("umin").innerHTML += b++;
+                    if(b > 9)
+                    {
+                        b = 0
+                    }
+                },60000)
+            }
+            function tmin(){
+                my5 = setInterval(function() {
+                    document.getElementById("tmin").innerHTML = ""
+                    document.getElementById("tmin").innerHTML += e++;
+                    if(e > 5)
+                    {
+                        e = 0
+                    }
+                },600000)
+            }
+            function start(){
+                umil()
+                tmil()
+                usecs()
+                tsecs()
+                umin()
+                tmin()
+                document.getElementById("start").disabled = true;
+                document.getElementById("start").innerHTML = "COUNTINUE"
+            }
+
+            var my
+            var my1
+            var my2
+            var my3
+            var my4
+            var my5
+            function stop(){
+                clearInterval(my)
+                clearInterval(my1)
+                clearInterval(my2)
+                clearInterval(my3)
+                clearInterval(my4)
+                clearInterval(my5)
+                document.getElementById("start").disabled = false;
+            }
+            function reset(){
+                document.location.reload()
+            }
+        </script>
+    </body>
+</html>
